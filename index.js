@@ -2,8 +2,26 @@ const inquirer = require('inquirer');
 const { createConnection } = require('net');
 const path = require('path');
 
-function runApp() {
+const connection = mysql.createConnection({
+    host: 'localhost',
+  
+    // Your port; if not 3306
+    port: 3306,
+  
+    // Your username
+    user: 'root',
+  
+    // Be sure to update with your own MySQL password!
+    password: 'Angie2212',
+    database: 'employee_trackerDB',
+  });
+  
+  connection.connect((err) => {
+    if (err) throw err;
+    runApp();
+  });
 
+function runApp() {
     inquirer
     .prompt([
         {
@@ -64,3 +82,39 @@ function runApp() {
     });
 
 };
+
+const addEmp = () => {
+    const choices = await employee_trackerDB.getManagers();
+    console.log(choices)
+    inquirer
+    .prompt({
+        type: 'input',
+        name: 'firstName',
+        message: "What is the employee's first name?"
+    },
+    {
+        type: 'input',
+        name: 'lastName',
+        message: "What is the employee's last name?"
+    },
+    {
+        type: 'list',
+        name: 'role',
+        meesage: "What is the employee's role?",
+        options: [
+            'Sales Lead',
+            'Salesperson',
+            'Lead Engineer',
+            'Software Engineer',
+            'Account Manager',
+            'Accountant',
+            'Legal Team Lead']
+    },
+    {
+        type: 'list',
+        name: 'manager',
+        meesage: "Who is the employee's manager?",
+        choices: choices
+    },
+    )
+}
