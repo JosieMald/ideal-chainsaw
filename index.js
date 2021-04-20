@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { createConnection } = require('net');
 const path = require('path');
+const mysql = require('mysql');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -17,6 +18,7 @@ const connection = mysql.createConnection({
   });
   
   connection.connect((err) => {
+      console.log('Hello World');
     if (err) throw err;
     runApp();
   });
@@ -83,7 +85,7 @@ function runApp() {
 
 };
 
-const addEmp = () => {
+const addEmp = async () => {
     const choices = await employee_trackerDB.getManagers();
     console.log(choices)
     inquirer
