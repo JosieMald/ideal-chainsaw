@@ -10,8 +10,6 @@ CREATE TABLE department(
   PRIMARY KEY (id)
 );
 
-SELECT * FROM role;
-
 CREATE TABLE role(
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NULL,
@@ -32,26 +30,46 @@ CREATE TABLE employee(
     PRIMARY KEY(id)
 );
 
+INSERT INTO department (name)
+VALUES
+('Sales'),
+('Engineering'),
+('Finance'),
+('Legal');
+SELECT * FROM department;
+
 INSERT INTO role (title, salary, departmentID) 
 VALUES 
 ('Sales Lead', 100000, 1),
-('Salesperson', 80000, 2),
-('Lead Engineer', 150000, 3),
-('Software Engineer', 120000, 4),
-('Accountant', 125000, 5),
-('Legal Team Lead', 250000, 6),
-('Lawyer', 190000, 7),
-('Lead Engineer', 150000, 8);
+('Salesperson', 80000, 1),
+('Lead Engineer', 150000, 2),
+('Software Engineer', 120000, 2),
+('Accountant', 125000, 3),
+('Legal Team Lead', 250000, 4),
+('Lawyer', 190000, 4),
+('Lead Engineer', 150000, 2);
 SELECT * FROM role;
+
+INSERT INTO employee (first_name, last_name, roleID)
+VALUES
+('Ashley', 'Rodriguez', 3),
+('Malia', 'Brown', 5),
+('Sarah', 'Lourd', 6);
 
 INSERT INTO employee (first_name, last_name, roleID, managerID)
 VALUES
-('Ashley', 'Rodriguez', 3, null),
 ('John', 'Doe', 1, 1),
-('Mike', 'Chan', 2, 2),
+('Mike', 'Chan', 2, 4),
 ('Kevin', 'Tupik', 4, 1),
-('Malia', 'Brown', 5, null),
-('Sarah', 'Lourd', 6, null),
-('Tom', 'Allen', 7, 6),
-('Christian', 'Eckenrode', 8, 3);
+('Tom', 'Allen', 7, 3),
+('Christian', 'Eckenrode', 8, 5);
 SELECT * FROM employee;
+
+SELECT * FROM department;
+SELECT * FROM role;
+SELECT * FROM employee;
+
+-- SELECT e.id, e.first_name, e.last_name, role.title, department.name
+-- FROM department d
+-- RIGHT JOIN employee ON e.roleID = roleID
+-- LEFT JOIN department ON role.departmentID = departmentID
