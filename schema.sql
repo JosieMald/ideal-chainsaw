@@ -46,8 +46,7 @@ VALUES
 ('Software Engineer', 120000, 2),
 ('Accountant', 125000, 3),
 ('Legal Team Lead', 250000, 4),
-('Lawyer', 190000, 4),
-('Lead Engineer', 150000, 2);
+('Lawyer', 190000, 4);
 SELECT * FROM role;
 
 INSERT INTO employee (first_name, last_name, roleID)
@@ -62,14 +61,13 @@ VALUES
 ('Mike', 'Chan', 2, 4),
 ('Kevin', 'Tupik', 4, 1),
 ('Tom', 'Allen', 7, 3),
-('Christian', 'Eckenrode', 8, 5);
+('Christian', 'Eckenrode', 7, 5);
 SELECT * FROM employee;
 
 SELECT * FROM department;
 SELECT * FROM role;
 SELECT * FROM employee;
 
--- SELECT e.id, e.first_name, e.last_name, role.title, department.name
--- FROM department d
--- RIGHT JOIN employee ON e.roleID = roleID
--- LEFT JOIN department ON role.departmentID = departmentID
+SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name)Employees, CONCAT(role.title)Title, CONCAT(department.name)Department, CONCAT(manager.first_name, ' ', manager.last_name)Managers
+FROM employee
+LEFT JOIN role ON employee.roleID = role.id LEFT JOIN department ON role.departmentID = department.id LEFT JOIN employee manager ON employee.id = manager.managerID
